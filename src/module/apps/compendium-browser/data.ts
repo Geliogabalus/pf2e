@@ -4,7 +4,17 @@ export interface PackInfo {
     load: boolean;
     name: string;
 }
-export type TabName = "action" | "bestiary" | "equipment" | "feat" | "hazard" | "spell" | "settings" | "ancestry";
+export type TabName =
+    | "action"
+    | "bestiary"
+    | "equipment"
+    | "feat"
+    | "hazard"
+    | "spell"
+    | "settings"
+    | "ancestry"
+    | "background"
+    | "heritage";
 export type BrowserTab = InstanceType<typeof browserTabs[keyof typeof browserTabs]>;
 export type TabData<T> = Record<TabName, T | null>;
 

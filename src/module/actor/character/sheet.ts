@@ -427,13 +427,28 @@ class CharacterSheetPF2e extends CreatureSheetPF2e<CharacterPF2e> {
             }
         });
 
-        // open ancestry, background, or class compendium
+        $html.find(".open-compendium").on("click", (event) => {
+            if (event.currentTarget.dataset.compendium) {
+                const compendium = game.packs.get(event.currentTarget.dataset.compendium);
+                if (compendium) {
+                    compendium.render(true);
+                }
+            }
+        });
+
+        // open ancestry or background
         $html.find(".open-compendium-browser").on("click", (event) => {
             if (event.currentTarget.dataset.compendiumTab) {
                 const compendiumTab: TabName = <TabName>event.currentTarget.dataset.compendiumTab;
                 switch (compendiumTab) {
                     case "ancestry":
                         game.pf2e.compendiumBrowser.openTab("ancestry", {}, ["ancestry"]);
+                        break;
+                    case "background":
+                        game.pf2e.compendiumBrowser.openTab("background", {}, ["background"]);
+                        break;
+                    case "heritage":
+                        game.pf2e.compendiumBrowser.openTab("heritage", {}, ["heritage"]);
                         break;
                     default:
                         break;

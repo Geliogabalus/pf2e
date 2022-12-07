@@ -105,6 +105,14 @@ interface AncestryFilters extends BaseFilterData {
     checkboxes: Record<"source", CheckboxData>;
 }
 
+interface BackgroundFilters extends BaseFilterData {
+    checkboxes: Record<"source", CheckboxData>;
+}
+
+interface HeritageFilters extends BaseFilterData {
+    checkboxes: Record<"source", CheckboxData>;
+}
+
 type CompendiumBrowserIndexData = Omit<CompendiumIndexData, "_id"> & Partial<SearchResult>;
 
 interface RenderResultListOptions {
@@ -185,6 +193,16 @@ interface InitialAncestryFilters extends BaseInitialFilters {
     orderBy?: CommonSortByOption;
 }
 
+interface InitialHeritageFilters extends BaseInitialFilters {
+    source?: string[];
+    orderBy?: CommonSortByOption;
+}
+
+interface InitialBackgroundFilters extends BaseInitialFilters {
+    source?: string[];
+    orderBy?: CommonSortByOption;
+}
+
 type InitialFilters =
     | InitialActionFilters
     | InitialBestiaryFilters
@@ -192,7 +210,9 @@ type InitialFilters =
     | InitialFeatFilters
     | InitialHazardFilters
     | InitialSpellFilters
-    | InitialAncestryFilters;
+    | InitialAncestryFilters
+    | InitialBackgroundFilters
+    | InitialHeritageFilters;
 
 export {
     ActionFilters,
@@ -209,6 +229,8 @@ export {
     RenderResultListOptions,
     SpellFilters,
     AncestryFilters,
+    HeritageFilters,
+    BackgroundFilters,
     InitialFilters,
     InitialActionFilters,
     InitialBestiaryFilters,
@@ -217,4 +239,6 @@ export {
     InitialHazardFilters,
     InitialSpellFilters,
     InitialAncestryFilters,
+    InitialHeritageFilters,
+    InitialBackgroundFilters,
 };

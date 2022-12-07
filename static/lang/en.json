@@ -1168,6 +1168,8 @@
             "TabHazard": "Hazards",
             "TabSpell": "Spells",
             "TabAncestry": "Ancestries",
+            "TabHeritage": "Heritages",
+            "TabBackground": "Backgrounds",
             "TabSettings": "Load Packs",
             "TakeLabel": "Take Item",
             "BuyLabel": "Buy Item",

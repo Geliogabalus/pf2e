@@ -16,6 +16,8 @@ import {
     InitialHazardFilters,
     InitialSpellFilters,
     InitialAncestryFilters,
+    InitialBackgroundFilters,
+    InitialHeritageFilters,
     RangesData,
     RenderResultListOptions,
 } from "./tabs/data";
@@ -84,7 +86,18 @@ class PackLoader {
 
 class CompendiumBrowser extends Application {
     settings: CompendiumBrowserSettings;
-    dataTabsList = ["action", "bestiary", "equipment", "feat", "hazard", "spell", "ancestry"] as const;
+    dataTabsList = [
+        "action",
+        "bestiary",
+        "equipment",
+        "feat",
+        "hazard",
+        "spell",
+        "ancestry",
+        "heritage",
+        "background",
+    ] as const;
+
     tabs: Record<Exclude<TabName, "settings">, BrowserTab>;
     packLoader = new PackLoader();
     visibleTabs!: TabName[];
@@ -115,6 +128,8 @@ class CompendiumBrowser extends Application {
             hazard: new browserTabs.Hazards(this),
             spell: new browserTabs.Spells(this),
             ancestry: new browserTabs.Ancestries(this),
+            heritage: new browserTabs.Heritages(this),
+            background: new browserTabs.Backgrounds(this),
         };
 
         this.visibleTabs = this.defaultVisibleTabs;
@@ -169,6 +184,8 @@ class CompendiumBrowser extends Application {
             feat: {},
             spell: {},
             ancestry: {},
+            heritage: {},
+            background: {},
         };
 
         // NPCs and Hazards are all loaded by default other packs can be set here.
@@ -180,6 +197,8 @@ class CompendiumBrowser extends Application {
             "pf2e.feats-srd": true,
             "pf2e.spells-srd": true,
             "pf2e.ancestries": true,
+            "pf2e.heritages": true,
+            "pf2e.backgrounds": true,
         };
 
         for (const pack of game.packs) {
@@ -235,6 +254,18 @@ class CompendiumBrowser extends Application {
                     load,
                     name: pack.metadata.label,
                 };
+            } else if (types.has("heritage")) {
+                const load = this.settings.heritage?.[pack.collection]?.load ?? !!loadDefault[pack.collection];
+                settings.heritage![pack.collection] = {
+                    load,
+                    name: pack.metadata.label,
+                };
+            } else if (types.has("background")) {
+                const load = this.settings.background?.[pack.collection]?.load ?? !!loadDefault[pack.collection];
+                settings.background![pack.collection] = {
+                    load,
+                    name: pack.metadata.label,
+                };
             }
         }
 
@@ -265,6 +296,8 @@ class CompendiumBrowser extends Application {
     openTab(tab: "hazard", filter?: InitialHazardFilters, visibleTabs?: TabName[]): Promise<void>;
     openTab(tab: "spell", filter?: InitialSpellFilters, visibleTabs?: TabName[]): Promise<void>;
     openTab(tab: "ancestry", filter?: InitialAncestryFilters, visibleTabs?: TabName[]): Promise<void>;
+    openTab(tab: "background", filter?: InitialHeritageFilters, visibleTabs?: TabName[]): Promise<void>;
+    openTab(tab: "heritage", filter?: InitialBackgroundFilters, visibleTabs?: TabName[]): Promise<void>;
     openTab(tab: "settings"): Promise<void>;
     async openTab(
         tab: TabName,
