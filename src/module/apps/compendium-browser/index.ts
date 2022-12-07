@@ -83,7 +83,7 @@ class PackLoader {
 
 class CompendiumBrowser extends Application {
     settings: CompendiumBrowserSettings;
-    dataTabsList = ["action", "bestiary", "equipment", "feat", "hazard", "spell"] as const;
+    dataTabsList = ["action", "bestiary", "equipment", "feat", "hazard", "spell", "ancestry"] as const;
     tabs: Record<Exclude<TabName, "settings">, BrowserTab>;
     packLoader = new PackLoader();
     activeTab!: TabName;
@@ -102,6 +102,7 @@ class CompendiumBrowser extends Application {
             feat: new browserTabs.Feats(this),
             hazard: new browserTabs.Hazards(this),
             spell: new browserTabs.Spells(this),
+            ancestry: new browserTabs.Ancestries(this),
         };
 
         this.settings = game.settings.get("pf2e", "compendiumBrowserPacks");
@@ -153,6 +154,7 @@ class CompendiumBrowser extends Application {
             equipment: {},
             feat: {},
             spell: {},
+            ancestry: {},
         };
 
         // NPCs and Hazards are all loaded by default other packs can be set here.
@@ -163,6 +165,7 @@ class CompendiumBrowser extends Application {
             "pf2e.classfeatures": true,
             "pf2e.feats-srd": true,
             "pf2e.spells-srd": true,
+            "pf2e.ancestries": true,
         };
 
         for (const pack of game.packs) {
@@ -209,6 +212,12 @@ class CompendiumBrowser extends Application {
             } else if (types.has("spell")) {
                 const load = this.settings.spell?.[pack.collection]?.load ?? !!loadDefault[pack.collection];
                 settings.spell![pack.collection] = {
+                    load,
+                    name: pack.metadata.label,
+                };
+            } else if (types.has("ancestry")) {
+                const load = this.settings.ancestry?.[pack.collection]?.load ?? !!loadDefault[pack.collection];
+                settings.ancestry![pack.collection] = {
                     load,
                     name: pack.metadata.label,
                 };

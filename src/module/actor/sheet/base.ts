@@ -203,6 +203,17 @@ abstract class ActorSheetPF2e<TActor extends ActorPF2e> extends ActorSheet<TActo
         // Item summaries
         this.itemRenderer.activateListeners($html);
 
+        /* -------------------------------------------- */
+        /*  Readonly events                             */
+        /* -------------------------------------------- */
+
+        // View an embedded item
+        $html.find(".item-view").on("click", (event) => {
+            const itemId = $(event.currentTarget).closest("[data-item-id]").attr("data-item-id");
+            const item = this.actor.items.get(itemId ?? "");
+            item?.sheet.render(true, { focus: true });
+        });
+
         // Everything below here is only needed if the sheet is editable
         if (!this.options.editable) return;
 

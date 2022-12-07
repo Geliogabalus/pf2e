@@ -1,7 +1,7 @@
 <div class="tab character" data-group="primary" data-tab="character">
     <section class="character-details">
         <div class="frame-container">
-            <div class="frame image-container"">
+            <div class="frame image-container">
                 <img class="player-image" alt="{{actor.name}}" src="{{actor.img}}" title="{{actor.name}}" data-edit="img" />
                 <a class="hover-icon" data-action="show-image"><i class="fas fa-image fa-fw"></i></a>
             </div>
@@ -25,8 +25,13 @@
                     {{#if @root.options.editable}}
                         {{#if deity}}
                             <a class="item-edit"><i class="fas fa-fw fa-edit"></i></a>
+                            <a class="open-compendium" data-compendium="pf2e.deities"><i class="fas fa-fw fa-search"></i></a>
                         {{else}}
-                            <a class="open-compendium" data-compendium="pf2e.deities"><i class="fas fa-fw fa-plus-circle"></i></a>
+                            <a class="open-compendium" data-compendium="pf2e.deities"><i class="fas fa-fw fa-search"></i></a>
+                        {{/if}}
+                    {{else}}
+                        {{#if deity}}
+                            <a class="item-view"><i class="fas fa-fw fa-eye"></i></a>
                         {{/if}}
                     {{/if}}
                 </h3>
@@ -46,8 +51,13 @@
                         {{#if @root.options.editable}}
                             {{#if ancestry}}
                                 <a class="item-edit"><i class="fas fa-fw fa-edit"></i></a>
+                                <a class="open-compendium" data-compendium="pf2e.ancestries"><i class="fas fa-fw fa-search"></i></a>
                             {{else}}
-                                <a class="open-compendium" data-compendium="pf2e.ancestries"><i class="fas fa-fw fa-plus-circle"></i></a>
+                                <a class="open-compendium" data-compendium="pf2e.ancestries"><i class="fas fa-fw fa-search"></i></a>
+                            {{/if}}
+                        {{else}}
+                            {{#if ancestry}}
+                                <a class="item-view"><i class="fas fa-fw fa-eye"></i></a>
                             {{/if}}
                         {{/if}}
                     </h3>
@@ -61,8 +71,13 @@
                         {{#if @root.options.editable}}
                             {{#if heritage}}
                                 <a class="item-edit"><i class="fas fa-fw fa-edit"></i></a>
+                                <a class="open-compendium" data-compendium="pf2e.heritages"><i class="fas fa-fw fa-search"></i></a>
                             {{else}}
-                                <a class="open-compendium" data-compendium="pf2e.heritages"><i class="fas fa-fw fa-plus-circle"></i></a>
+                                <a class="open-compendium" data-compendium="pf2e.heritages"><i class="fas fa-fw fa-search"></i></a>
+                            {{/if}}
+                        {{else}}
+                            {{#if heritage}}
+                                <a class="item-view"><i class="fas fa-fw fa-eye"></i></a>
                             {{/if}}
                         {{/if}}
                     </h3>
@@ -76,8 +91,13 @@
                         {{#if @root.options.editable}}
                             {{#if class}}
                                 <a class="item-edit"><i class="fas fa-fw fa-edit"></i></a>
+                                <a class="open-compendium" data-compendium="pf2e.backgrounds"><i class="fas fa-fw fa-search"></i></a>
                             {{else}}
-                                <a class="open-compendium" data-compendium="pf2e.classes"><i class="fas fa-fw fa-plus-circle"></i></a>
+                                <a class="open-compendium" data-compendium="pf2e.classes"><i class="fas fa-fw fa-search"></i></a>
+                            {{/if}}
+                        {{else}}
+                            {{#if class}}
+                                <a class="item-view"><i class="fas fa-fw fa-eye"></i></a>
                             {{/if}}
                         {{/if}}
                     </h3>
@@ -93,8 +113,13 @@
                         {{#if @root.options.editable}}
                             {{#if background}}
                                 <a class="item-edit"><i class="fas fa-fw fa-edit"></i></a>
+                                <a class="open-compendium" data-compendium="pf2e.backgrounds"><i class="fas fa-fw fa-search"></i></a>
                             {{else}}
-                                <a class="open-compendium" data-compendium="pf2e.backgrounds"><i class="fas fa-fw fa-plus-circle"></i></a>
+                                <a class="open-compendium" data-compendium="pf2e.backgrounds"><i class="fas fa-fw fa-search"></i></a>
+                            {{/if}}
+                        {{else}}
+                            {{#if background}}
+                                <a class="item-view"><i class="fas fa-fw fa-eye"></i></a>
                             {{/if}}
                         {{/if}}
                     </h3>

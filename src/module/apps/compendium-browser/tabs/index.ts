@@ -4,3 +4,4 @@ export { CompendiumBrowserEquipmentTab as Equipment } from "./equipment";
 export { CompendiumBrowserFeatTab as Feats } from "./feat";
 export { CompendiumBrowserHazardTab as Hazards } from "./hazard";
 export { CompendiumBrowserSpellTab as Spells } from "./spell";
+export { CompendiumBrowserAncestryTab as Ancestries } from "./ancestry";
