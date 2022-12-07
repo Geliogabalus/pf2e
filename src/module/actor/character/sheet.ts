@@ -4,6 +4,7 @@ import { ActorSheetDataPF2e } from "@actor/sheet/data-types";
 import { ActionItemPF2e, isSpellConsumable, ItemPF2e, WEAPON_CATEGORIES } from "@item";
 import { ItemSourcePF2e, LoreData } from "@item/data";
 import { BaseWeaponType, WeaponGroup } from "@item/weapon/types";
+import { TabName } from "@module/apps/compendium-browser/data";
 import { DropCanvasItemDataPF2e } from "@module/canvas/drop-canvas-data";
 import { PROFICIENCY_RANKS } from "@module/data";
 import { restForTheNight } from "@scripts/macros/rest-for-the-night";
@@ -427,11 +428,15 @@ class CharacterSheetPF2e extends CreatureSheetPF2e<CharacterPF2e> {
         });
 
         // open ancestry, background, or class compendium
-        $html.find(".open-compendium").on("click", (event) => {
-            if (event.currentTarget.dataset.compendium) {
-                const compendium = game.packs.get(event.currentTarget.dataset.compendium);
-                if (compendium) {
-                    compendium.render(true);
+        $html.find(".open-compendium-browser").on("click", (event) => {
+            if (event.currentTarget.dataset.compendiumTab) {
+                const compendiumTab: TabName = <TabName>event.currentTarget.dataset.compendiumTab;
+                switch (compendiumTab) {
+                    case "ancestry":
+                        game.pf2e.compendiumBrowser.openTab("ancestry", {}, ["ancestry"]);
+                        break;
+                    default:
+                        break;
                 }
             }
         });

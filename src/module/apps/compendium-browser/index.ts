@@ -15,6 +15,7 @@ import {
     InitialFilters,
     InitialHazardFilters,
     InitialSpellFilters,
+    InitialAncestryFilters,
     RangesData,
     RenderResultListOptions,
 } from "./tabs/data";
@@ -86,8 +87,19 @@ class CompendiumBrowser extends Application {
     dataTabsList = ["action", "bestiary", "equipment", "feat", "hazard", "spell", "ancestry"] as const;
     tabs: Record<Exclude<TabName, "settings">, BrowserTab>;
     packLoader = new PackLoader();
+    visibleTabs!: TabName[];
     activeTab!: TabName;
     navigationTab!: Tabs;
+
+    private readonly defaultVisibleTabs: TabName[] = [
+        "action",
+        "bestiary",
+        "equipment",
+        "feat",
+        "hazard",
+        "spell",
+        "settings",
+    ];
 
     /** An initial filter to be applied upon loading a tab */
     private initialFilter: InitialFilters = {};
@@ -104,6 +116,8 @@ class CompendiumBrowser extends Application {
             spell: new browserTabs.Spells(this),
             ancestry: new browserTabs.Ancestries(this),
         };
+
+        this.visibleTabs = this.defaultVisibleTabs;
 
         this.settings = game.settings.get("pf2e", "compendiumBrowserPacks");
 
@@ -244,15 +258,21 @@ class CompendiumBrowser extends Application {
         };
     }
 
-    openTab(tab: "action", filter?: InitialActionFilters): Promise<void>;
-    openTab(tab: "bestiary", filter?: InitialBestiaryFilters): Promise<void>;
-    openTab(tab: "equipment", filter?: InitialEquipmentFilters): Promise<void>;
-    openTab(tab: "feat", filter?: InitialFeatFilters): Promise<void>;
-    openTab(tab: "hazard", filter?: InitialHazardFilters): Promise<void>;
-    openTab(tab: "spell", filter?: InitialSpellFilters): Promise<void>;
+    openTab(tab: "action", filter?: InitialActionFilters, visibleTabs?: TabName[]): Promise<void>;
+    openTab(tab: "bestiary", filter?: InitialBestiaryFilters, visibleTabs?: TabName[]): Promise<void>;
+    openTab(tab: "equipment", filter?: InitialEquipmentFilters, visibleTabs?: TabName[]): Promise<void>;
+    openTab(tab: "feat", filter?: InitialFeatFilters, visibleTabs?: TabName[]): Promise<void>;
+    openTab(tab: "hazard", filter?: InitialHazardFilters, visibleTabs?: TabName[]): Promise<void>;
+    openTab(tab: "spell", filter?: InitialSpellFilters, visibleTabs?: TabName[]): Promise<void>;
+    openTab(tab: "ancestry", filter?: InitialAncestryFilters, visibleTabs?: TabName[]): Promise<void>;
     openTab(tab: "settings"): Promise<void>;
-    async openTab(tab: TabName, filter: InitialFilters = {}): Promise<void> {
+    async openTab(
+        tab: TabName,
+        filter: InitialFilters = {},
+        visibleTabs: TabName[] = this.defaultVisibleTabs
+    ): Promise<void> {
         this.initialFilter = filter;
+        this.visibleTabs = visibleTabs;
         await this._render(true);
         this.initialFilter = filter; // Reapply in case of a double-render (need to track those down)
         this.navigationTab.activate(tab, { triggerCallback: true });
@@ -975,28 +995,32 @@ class CompendiumBrowser extends Application {
 
     override getData() {
         const activeTab = this.activeTab;
+
+        /* const visibleTabs = this.visibleTabs.reduce<{ [key: string]: boolean }>((result, tab) => {
+            result[tab] = true;
+            return result;
+        }, {});*/
+        const data: any = {
+            user: game.user,
+            visibleTabs: this.visibleTabs,
+        };
+
         // Settings
         if (activeTab === "settings") {
-            return {
-                user: game.user,
-                settings: this.settings,
-            };
+            data.settings = this.settings;
+            return data;
         }
         // Active tab
         const tab = this.tabs[activeTab];
         if (tab) {
-            return {
-                user: game.user,
-                [activeTab]: {
-                    filterData: tab.filterData,
-                },
-                scrollLimit: tab.scrollLimit,
+            data[activeTab] = {
+                filterData: tab.filterData,
             };
+            data.scrollLimit = tab.scrollLimit;
+            return data;
         }
         // No active tab
-        return {
-            user: game.user,
-        };
+        return data;
     }
 
     private resetFilters(): void {

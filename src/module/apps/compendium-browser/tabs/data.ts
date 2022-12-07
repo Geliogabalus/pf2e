@@ -101,6 +101,10 @@ interface SpellFilters extends BaseFilterData {
     selects: Record<"timefilter", SelectData>;
 }
 
+interface AncestryFilters extends BaseFilterData {
+    checkboxes: Record<"source", CheckboxData>;
+}
+
 type CompendiumBrowserIndexData = Omit<CompendiumIndexData, "_id"> & Partial<SearchResult>;
 
 interface RenderResultListOptions {
@@ -176,13 +180,19 @@ interface InitialSpellFilters extends BaseInitialFilters {
     orderBy?: CommonSortByOption;
 }
 
+interface InitialAncestryFilters extends BaseInitialFilters {
+    source?: string[];
+    orderBy?: CommonSortByOption;
+}
+
 type InitialFilters =
     | InitialActionFilters
     | InitialBestiaryFilters
     | InitialEquipmentFilters
     | InitialFeatFilters
     | InitialHazardFilters
-    | InitialSpellFilters;
+    | InitialSpellFilters
+    | InitialAncestryFilters;
 
 export {
     ActionFilters,
@@ -198,6 +208,7 @@ export {
     RangesData,
     RenderResultListOptions,
     SpellFilters,
+    AncestryFilters,
     InitialFilters,
     InitialActionFilters,
     InitialBestiaryFilters,
@@ -205,4 +216,5 @@ export {
     InitialFeatFilters,
     InitialHazardFilters,
     InitialSpellFilters,
+    InitialAncestryFilters,
 };

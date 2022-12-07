@@ -1,11 +1,7 @@
 import { sluggify } from "@util";
 import { CompendiumBrowser } from "..";
 import { CompendiumBrowserTab } from "./base";
-import { BaseFilterData, CheckboxData, CompendiumBrowserIndexData } from "./data";
-
-interface AncestryFilters extends BaseFilterData {
-    checkboxes: Record<"source", CheckboxData>;
-}
+import { AncestryFilters, CompendiumBrowserIndexData } from "./data";
 
 export class CompendiumBrowserAncestryTab extends CompendiumBrowserTab {
     override filterData!: AncestryFilters;

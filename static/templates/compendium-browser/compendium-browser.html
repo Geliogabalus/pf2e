@@ -1,20 +1,30 @@
 <div class="content-box">
     <nav data-group="primary">
         <a data-tab="landing-page" style="display:none"></a>
-        <a data-tab="action">{{localize "PF2E.CompendiumBrowser.TabAction"}}</a>
-        {{#if user.isGM}}
+        {{#if (contains visibleTabs 'action')}}
+            <a data-tab="action">{{localize "PF2E.CompendiumBrowser.TabAction"}}</a>
+        {{/if}}
+        {{#if_all user.isGM (contains visibleTabs 'bestiary')}}
             <a data-tab="bestiary">{{localize "PF2E.CompendiumBrowser.TabBestiary"}}</a>
+        {{/if_all}}
+        {{#if (contains visibleTabs 'equipment')}}
+            <a data-tab="equipment">{{localize "PF2E.CompendiumBrowser.TabEquipment"}}</a>
         {{/if}}
-        <a data-tab="equipment">{{localize "PF2E.CompendiumBrowser.TabEquipment"}}</a>
-        <a data-tab="feat">{{localize "PF2E.CompendiumBrowser.TabFeat"}}</a>
-        {{#if user.isGM}}
+        {{#if (contains visibleTabs 'feat')}}
+            <a data-tab="feat">{{localize "PF2E.CompendiumBrowser.TabFeat"}}</a>
+        {{/if}}
+        {{#if_all user.isGM (contains visibleTabs 'hazard')}}
             <a data-tab="hazard">{{localize "PF2E.CompendiumBrowser.TabHazard"}}</a>
+        {{/if_all}}
+        {{#if (contains visibleTabs 'spell')}}
+            <a data-tab="spell">{{localize "PF2E.CompendiumBrowser.TabSpell"}}</a>
         {{/if}}
-        <a data-tab="spell">{{localize "PF2E.CompendiumBrowser.TabSpell"}}</a>
-        <a data-tab="ancestry">{{localize "PF2E.CompendiumBrowser.TabAncestry"}}</a>
-        {{#if user.isGM}}
+        {{#if (contains visibleTabs 'ancestry')}}
+            <a data-tab="ancestry">{{localize "PF2E.CompendiumBrowser.TabAncestry"}}</a>
+        {{/if}}
+        {{#if_all user.isGM (contains visibleTabs 'settings')}}
             <a data-tab="settings">{{localize "PF2E.CompendiumBrowser.TabSettings"}}</a>
-        {{/if}}
+        {{/if_all}}
     </nav>
     <section class="content">
         <div class="tab" data-group="primary" data-tab="landing-page">
