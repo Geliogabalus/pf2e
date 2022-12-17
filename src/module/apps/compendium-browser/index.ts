@@ -171,6 +171,7 @@ class CompendiumBrowser extends Application {
         for (const tab of Object.values(this.tabs)) {
             tab.filterData.search.text = "";
         }
+        this.visibleTabs = this.defaultVisibleTabs;
 
         await super.close(options);
     }

@@ -442,13 +442,13 @@ class CharacterSheetPF2e extends CreatureSheetPF2e<CharacterPF2e> {
                 const compendiumTab: TabName = <TabName>event.currentTarget.dataset.compendiumTab;
                 switch (compendiumTab) {
                     case "ancestry":
-                        game.pf2e.compendiumBrowser.openTab("ancestry", {}, ["ancestry"]);
+                        game.pf2e.compendiumBrowser.openTab("ancestry", {}, ["ancestry", "background", "heritage"]);
                         break;
                     case "background":
-                        game.pf2e.compendiumBrowser.openTab("background", {}, ["background"]);
+                        game.pf2e.compendiumBrowser.openTab("background", {}, ["ancestry", "background", "heritage"]);
                         break;
                     case "heritage":
-                        game.pf2e.compendiumBrowser.openTab("heritage", {}, ["heritage"]);
+                        game.pf2e.compendiumBrowser.openTab("heritage", {}, ["ancestry", "background", "heritage"]);
                         break;
                     default:
                         break;
