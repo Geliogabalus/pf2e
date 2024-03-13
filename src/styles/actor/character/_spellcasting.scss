@@ -3,6 +3,10 @@
     overflow-y: hidden;
     scrollbar-gutter: initial;
 
+    nav.sub-nav a {
+        font-size: var(--font-size-14);
+    }
+
     nav.spell-collections a.rituals {
         flex-basis: 20%;
     }

@@ -19,6 +19,10 @@
         "prerequisites": {
             "value": []
         },
+        "pseudospell": {
+            "name": "Kobold Breath",
+            "uuid": "Compendium.pf2e.feat-pseudospells.Item.Kobold Breath"
+        },
         "publication": {
             "license": "OGL",
             "remaster": false,

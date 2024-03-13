@@ -256,10 +256,11 @@ class CharacterSheetPF2e<TActor extends CharacterPF2e> extends CreatureSheetPF2e
 
         // Spellcasting
         const collectionGroups: Record<SpellcastingTabSlug, SpellcastingSheetData[]> = fu.mergeObject(
-            { "known-spells": [], rituals: [], activations: [] },
+            { "known-spells": [], rituals: [], activations: [], pseudospells: [] },
             R.groupBy.strict(await this.prepareSpellcasting(), (a) => {
                 if (a.category === "items") return "activations";
                 if (a.category === "ritual") return "rituals";
+                if (a.category === "pseudospell") return "pseudospells";
                 return "known-spells";
             }),
         );
@@ -1620,7 +1621,7 @@ interface CraftingSheetData {
 }
 
 type CharacterSheetTabVisibility = Record<(typeof CHARACTER_SHEET_TABS)[number], boolean>;
-type SpellcastingTabSlug = "known-spells" | "rituals" | "activations";
+type SpellcastingTabSlug = "known-spells" | "rituals" | "pseudospells" | "activations";
 
 interface CharacterSheetData<TActor extends CharacterPF2e = CharacterPF2e> extends CreatureSheetData<TActor> {
     abpEnabled: boolean;

@@ -252,6 +252,7 @@
                     "Tab": {
                         "Activations": "Activations",
                         "KnownSpells": "Known Spells",
+                        "Pseudospells": "Pseudospells",
                         "Rituals": "Rituals"
                     }
                 }
