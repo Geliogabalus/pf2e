@@ -660,6 +660,7 @@ class ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | n
         this.spellcasting = null;
 
         this.synthetics = {
+            checkAlterations: {},
             criticalSpecializations: { standard: [], alternate: [] },
             damageAlterations: {},
             damageDice: { damage: [] },

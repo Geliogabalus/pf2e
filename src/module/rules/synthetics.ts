@@ -23,9 +23,11 @@ import type { PredicatePF2e } from "@system/predication.ts";
 import type { Statistic } from "@system/statistic/index.ts";
 import type { DamageAlteration } from "./rule-element/damage-alteration/alteration.ts";
 import type { Suboption } from "./rule-element/roll-option/data.ts";
+import { CheckAlteration } from "./rule-element/check-alteration/alteration.ts";
 
 /** Defines a list of data provided by rule elements that an actor can pull from during its data preparation lifecycle */
 interface RuleElementSynthetics {
+    checkAlterations: Record<string, CheckAlteration[]>;
     criticalSpecializations: {
         standard: CritSpecSynthetic[];
         alternate: CritSpecSynthetic[];
